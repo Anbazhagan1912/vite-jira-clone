@@ -4,6 +4,7 @@ import { IconUserSearch } from "@tabler/icons";
 import { IconPackgeImport } from "@tabler/icons";
 import { Link } from "react-router-dom";
 import CreateTask from "./CreateTask";
+import CreateTeam from "./CreateTeam";
 import { useState } from "react";
 import { Modal } from "@mantine/core";
 import { Tooltip } from "@mantine/core";
@@ -12,6 +13,7 @@ import CreateProject from "./CreateProject";
 const Nav = () => {
   const [project, Setproject] = useState<boolean>(false);
   const [opened, setOpened] = useState<boolean>(false);
+  const [Team, setTeam] = useState<boolean>(false);
   const role = localStorage.getItem("role");
 
   return (
@@ -70,6 +72,17 @@ const Nav = () => {
             </Link>
           </Tooltip>
         </div>
+        <div className="flex justify-center items-center cursor-pointer  mb-[10px]  text-[14px]">
+          <Tooltip label={"Create Team"} position="right" withArrow>
+            <IconEdit
+              onClick={() => {
+                setTeam(true);
+              }}
+              size={18}
+              className="text-white"
+            ></IconEdit>
+          </Tooltip>
+        </div>
       </div>
       <div className="flex  absolute bottom-10 cursor-pointer justify-center items-center text-[14px]">
         <Tooltip label={"Logout "} position="right" withArrow>
@@ -100,6 +113,20 @@ const Nav = () => {
       >
         <CreateTask></CreateTask>
         {/* <Createteam></Createteam> */}
+      </Modal>
+      <Modal
+        size="35%"
+        overlayOpacity={0.55}
+        overlayBlur={3}
+        // position="right"
+        opened={Team}
+        onClose={() => setTeam(false)}
+        title="Create Team"
+        padding="xl"
+        className="p-[40px]"
+      >
+        {/* <CreateTask></CreateTask> */}
+        <CreateTeam></CreateTeam>
       </Modal>
     </div>
   );
